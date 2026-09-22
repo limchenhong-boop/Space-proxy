@@ -1,0 +1,17 @@
+services:
+  app:
+    image: node:22
+    working_dir: /app
+    command: sh -c "npm install --no-audit --no-fund && npx --yes nodemon --watch server.js --watch masqr.js --watch config.js server.js"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    ports:
+      - "3000:2345"
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - /run/base44/app.env
+
+volumes:
+  node_modules:
